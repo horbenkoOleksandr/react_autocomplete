@@ -52,9 +52,17 @@ export const Autocomplete: React.FC<Props> = ({
   const handleSuggestionClick = (person: Person) => {
     setQuery(person.name);
     setIsFocused(false);
-    setAppliedQuery('');
+    setAppliedQuery(person.name);
     onSelected(person);
   };
+
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
 
   return (
     <>
@@ -67,8 +75,8 @@ export const Autocomplete: React.FC<Props> = ({
             data-cy="search-input"
             value={query}
             onChange={handleInputChange}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </div>
 
