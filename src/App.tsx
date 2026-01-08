@@ -7,23 +7,22 @@ import { Person } from './types/Person';
 export const App: React.FC = () => {
   const [selectPerson, setSelectPerson] = useState<Person | null>(null);
 
-  const getDataPerson = (person: Person) => {
+  const handlePersonSelected = (person: Person) => {
     setSelectPerson(person);
   };
-  
+
   return (
     <div className="container">
       <main className="section is-flex is-flex-direction-column">
         <h1 className="title" data-cy="title">
           {selectPerson
             ? `${selectPerson?.name} (${selectPerson?.born} - ${selectPerson?.died})`
-            : 'No selected person'
-          }
+            : 'No selected person'}
         </h1>
 
-        <Autocomplete 
+        <Autocomplete
           allPeople={peopleFromServer}
-          onSelected={getDataPerson}
+          onSelected={handlePersonSelected}
           setSelectPerson={setSelectPerson}
         />
       </main>
